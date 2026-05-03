@@ -1,0 +1,91 @@
+/* ─── ANIMATIONS & SCROLL REVEAL ────────────────────────────────────────── */
+
+/*
+ * Reveal classes are ONLY hidden once JS has loaded successfully.
+ * The <body> gets class="js-ready" from main.js on DOMContentLoaded.
+ * Without JS (or on file:// protocol without a server), content is
+ * always visible — no dependency on script execution.
+ */
+
+/* ── Initial hidden states (only when JS is active) ─────────── */
+body.js-ready .reveal-up {
+  opacity: 0;
+  transform: translateY(44px);
+}
+
+body.js-ready .reveal-left {
+  opacity: 0;
+  transform: translateX(-52px);
+}
+
+body.js-ready .reveal-right {
+  opacity: 0;
+  transform: translateX(52px);
+}
+
+body.js-ready .reveal-fade {
+  opacity: 0;
+}
+
+body.js-ready .reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+/* ── Visible state (added by IntersectionObserver) ───────────── */
+body.js-ready .reveal-up.is-visible,
+body.js-ready .reveal-left.is-visible,
+body.js-ready .reveal-right.is-visible,
+body.js-ready .reveal-fade.is-visible,
+body.js-ready .reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-slow) var(--ease-expo),
+    transform var(--dur-slow) var(--ease-expo);
+  transition-delay: var(--delay, 0ms);
+}
+
+/* ── Hero entrance animation ──────────────────────────────────── */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroEnter var(--dur-slow) var(--ease-expo) forwards;
+}
+
+@keyframes heroEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Scroll hint line animation ───────────────────────────────── */
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  49%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0.4; }
+}
+
+/* ── Spinner (reused by form submit) ──────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Image shimmer on load ────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.img-placeholder {
+  background: linear-gradient(
+    90deg,
+    var(--color-sand) 25%,
+    var(--color-sand-dark) 50%,
+    var(--color-sand) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}

@@ -1,0 +1,217 @@
+/* ─── COMPONENTS ─────────────────────────────────────────────────────────── */
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.25rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-base) var(--ease-expo),
+    color var(--dur-base) var(--ease-expo),
+    border-color var(--dur-base) var(--ease-expo),
+    box-shadow var(--dur-base) var(--ease-expo),
+    transform var(--dur-fast) ease;
+}
+
+.btn:hover  { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
+  border-color: var(--color-terracotta);
+}
+.btn-primary:hover {
+  background-color: var(--color-terracotta-dk);
+  border-color: var(--color-terracotta-dk);
+  box-shadow: 0 8px 24px rgba(196, 112, 74, 0.35);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-terracotta);
+  border-color: var(--color-terracotta);
+}
+.btn-outline:hover {
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
+}
+
+/* Submit button spinner */
+.btn-submit {
+  position: relative;
+  min-width: 200px;
+}
+
+.btn-spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.btn-submit.is-loading .btn-text {
+  opacity: 0.6;
+}
+
+.btn-submit.is-loading .btn-spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Form Fields ─────────────────────────────────────────────── */
+.field-group {
+  position: relative;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  width: 100%;
+  padding: 1.35rem 1rem 0.55rem;
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-sand-dark);
+  border-radius: var(--radius);
+  font-size: var(--text-base);
+  color: var(--color-walnut);
+  appearance: none;
+  -webkit-appearance: none;
+  transition:
+    border-color var(--dur-base) var(--ease-expo),
+    box-shadow var(--dur-base) var(--ease-expo);
+}
+
+.field-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238A7060' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.field-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* Floating label */
+.field-group label {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition:
+    top var(--dur-base) var(--ease-expo),
+    font-size var(--dur-base) var(--ease-expo),
+    color var(--dur-base) var(--ease-expo),
+    transform var(--dur-base) var(--ease-expo);
+  transform-origin: left center;
+}
+
+/* Textarea label starts at top, not vertically centered */
+.field-group:has(textarea) label {
+  top: 1.35rem;
+  transform: none;
+}
+
+/* Float the label up on focus or when value is present */
+.field-group input:focus ~ label,
+.field-group input:not(:placeholder-shown) ~ label,
+.field-group select:focus ~ label,
+.field-group textarea:focus ~ label,
+.field-group textarea:not(:placeholder-shown) ~ label {
+  top: 0.45rem;
+  transform: none;
+  font-size: var(--text-xs);
+  color: var(--color-terracotta);
+}
+
+/* Select: always float since placeholder trick doesn't apply */
+.field-group select ~ label {
+  top: 0.45rem;
+  transform: none;
+  font-size: var(--text-xs);
+  color: var(--color-terracotta);
+}
+
+/* Focus ring */
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(184, 146, 42, 0.18);
+}
+
+/* Error state */
+.field-group.has-error input,
+.field-group.has-error select,
+.field-group.has-error textarea {
+  border-color: var(--color-error);
+}
+.field-group.has-error label {
+  color: var(--color-error);
+}
+
+/* Valid state */
+.field-group.is-valid input,
+.field-group.is-valid select,
+.field-group.is-valid textarea {
+  border-color: #5A9E6F;
+}
+
+.field-error {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: 0.35rem;
+  min-height: 1.1em;
+  padding-left: 0.25rem;
+}
+
+/* Form row */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+@media (max-width: 599px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field-group--full {
+  grid-column: 1 / -1;
+}

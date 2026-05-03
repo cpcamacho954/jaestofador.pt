@@ -1,0 +1,194 @@
+/* ─── HERO ───────────────────────────────────────────────────────────────── */
+
+#hero {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-block: 0;
+}
+
+/* ── Video Background ──────────────────────────────────────────── */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-below);
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Warm dark overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(20, 12, 6, 0.65) 0%,
+    rgba(20, 12, 6, 0.50) 50%,
+    rgba(44, 31, 20, 0.60) 100%
+  );
+}
+
+/* Fallback when video can't play */
+.hero-media--fallback {
+  background-image: url('/images/23555986-real-estate-9053405_1280.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* ── Hero Content ───────────────────────────────────────────────── */
+.hero-content {
+  position: relative;
+  z-index: var(--z-above);
+  text-align: center;
+  max-width: 900px;
+  padding-inline: var(--container-pad);
+  padding-top: 80px; /* account for fixed header */
+}
+
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  margin-bottom: var(--space-3);
+  animation-delay: 200ms;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: var(--space-3);
+  animation-delay: 380ms;
+}
+
+.hero-headline em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-gold-light);
+  display: block;
+}
+
+.hero-subheadline {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 300;
+  line-height: var(--leading-loose);
+  color: rgba(245, 240, 232, 0.82);
+  margin-bottom: var(--space-6);
+  max-width: 56ch;
+  margin-inline: auto;
+  animation-delay: 560ms;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  animation-delay: 740ms;
+}
+
+/* Apply staggered entrance to hero children */
+.hero-eyebrow,
+.hero-headline,
+.hero-subheadline,
+.hero-actions {
+  opacity: 0;
+  animation: heroFadeUp 0.9s var(--ease-expo) forwards;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Scroll Hint ─────────────────────────────────────────────── */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  opacity: 0;
+  animation: heroFadeUp 0.8s var(--ease-expo) 1.2s forwards;
+}
+
+.scroll-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.5);
+}
+
+.scroll-line {
+  display: block;
+  width: 1.5px;
+  height: 48px;
+  background-color: var(--color-gold);
+  transform-origin: top;
+  animation: scrollPulse 2.2s ease-in-out 1.5s infinite;
+}
+
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  48%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0.3; }
+}
+
+/* ── Mobile adjustments ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero-headline {
+    line-height: 1.08;
+  }
+
+  .hero-headline em {
+    display: inline;
+  }
+
+  .hero-video {
+    display: none;
+  }
+
+  .hero-media {
+    background-image: url('/images/23555986-real-estate-9053405_1280.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    text-align: center;
+  }
+}

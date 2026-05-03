@@ -1,0 +1,119 @@
+/* ─── SERVICES ───────────────────────────────────────────────────────────── */
+
+#servicos {
+  background-color: var(--color-cream);
+}
+
+.services-inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+/* ── Service Card ─────────────────────────────────────────────── */
+.service-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--dur-base) var(--ease-expo),
+    box-shadow var(--dur-base) var(--ease-expo);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Card Image ───────────────────────────────────────────────── */
+.service-img-wrap {
+  overflow: hidden;
+  height: 220px;
+  flex-shrink: 0;
+}
+
+.service-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.85s var(--ease-expo);
+}
+
+.service-card:hover .service-img-wrap img {
+  transform: scale(1.07);
+}
+
+/* ── Card Body ────────────────────────────────────────────────── */
+.service-body {
+  padding: var(--space-4) var(--space-4) var(--space-4);
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Decorative background numeral */
+.service-num {
+  position: absolute;
+  top: -0.25rem;
+  right: var(--space-3);
+  font-family: var(--font-serif);
+  font-size: 5.5rem;
+  font-weight: 700;
+  color: var(--color-walnut);
+  opacity: 0.055;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity var(--dur-base) ease;
+}
+
+.service-card:hover .service-num {
+  opacity: 0.1;
+}
+
+.service-body h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+  position: relative;
+}
+
+.service-body p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+  margin-bottom: var(--space-4);
+  flex: 1;
+  position: relative;
+}
+
+.service-body .link-arrow {
+  position: relative;
+  margin-top: auto;
+}
+
+/* ── Mobile ───────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,80 @@
+/* ─── DESIGN TOKENS ─────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Colors ─────────────────────────────────────────────────────── */
+  --color-cream:          #F5F0E8;
+  --color-sand:           #E8DCC8;
+  --color-sand-dark:      #D4C4A8;
+  --color-terracotta:     #C4704A;
+  --color-terracotta-dk:  #A85A38;
+  --color-walnut:         #2C1F14;
+  --color-walnut-mid:     #4A3728;
+  --color-gold:           #B8922A;
+  --color-gold-light:     #D4AD4F;
+  --color-white:          #FFFFFF;
+  --color-text-body:      #5C4A38;
+  --color-text-muted:     #8A7060;
+  --color-overlay:        rgba(20, 12, 6, 0.58);
+  --color-error:          #C0392B;
+
+  /* ── Typography ─────────────────────────────────────────────────── */
+  --font-serif:  'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:   'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* Fluid type scale using clamp(min, preferred, max) */
+  --text-xs:   clamp(0.72rem,  1.4vw, 0.813rem);
+  --text-sm:   clamp(0.875rem, 1.8vw, 1rem);
+  --text-base: clamp(1rem,     2vw,   1.125rem);
+  --text-lg:   clamp(1.125rem, 2.5vw, 1.375rem);
+  --text-xl:   clamp(1.375rem, 3vw,   1.75rem);
+  --text-2xl:  clamp(1.75rem,  4vw,   2.25rem);
+  --text-3xl:  clamp(2.25rem,  5.5vw, 3.5rem);
+  --text-hero: clamp(2.8rem,   7.5vw, 6rem);
+
+  --leading-tight:  1.1;
+  --leading-snug:   1.3;
+  --leading-normal: 1.65;
+  --leading-loose:  1.85;
+
+  --tracking-tight: -0.03em;
+  --tracking-wide:  0.1em;
+  --tracking-wider: 0.18em;
+
+  /* ── Spacing (8px grid) ─────────────────────────────────────────── */
+  --space-1:  0.5rem;
+  --space-2:  1rem;
+  --space-3:  1.5rem;
+  --space-4:  2rem;
+  --space-6:  3rem;
+  --space-8:  4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-24: 12rem;
+
+  /* ── Layout ─────────────────────────────────────────────────────── */
+  --container-max: 1320px;
+  --container-pad: clamp(1.25rem, 5vw, 4rem);
+  --section-pad-y: clamp(5rem, 10vw, 9rem);
+  --radius:        4px;
+  --radius-lg:     8px;
+
+  /* ── Easing & Duration ──────────────────────────────────────────── */
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:    180ms;
+  --dur-base:    360ms;
+  --dur-slow:    640ms;
+  --dur-xslow:   1000ms;
+
+  /* ── Shadows ────────────────────────────────────────────────────── */
+  --shadow-sm: 0 2px 8px  rgba(44, 31, 20, 0.08);
+  --shadow-md: 0 8px 32px rgba(44, 31, 20, 0.14);
+  --shadow-lg: 0 24px 64px rgba(44, 31, 20, 0.20);
+
+  /* ── Z-index ────────────────────────────────────────────────────── */
+  --z-below:   -1;
+  --z-base:     0;
+  --z-above:    10;
+  --z-nav:      100;
+  --z-overlay:  200;
+}

@@ -1,0 +1,24 @@
+/* ─── LAYOUT ─────────────────────────────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+section {
+  padding-block: var(--section-pad-y);
+  position: relative;
+}
+
+/* Section background alternation */
+#sobre     { background-color: var(--color-sand); }
+#servicos  { background-color: var(--color-cream); }
+#portfolio { background-color: var(--color-walnut); }
+#contacto  { background-color: var(--color-sand); }
+
+/* Decorative top/bottom rule between sections */
+section + section::before {
+  content: none;
+}

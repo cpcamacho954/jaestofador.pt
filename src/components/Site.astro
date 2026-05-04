@@ -1,0 +1,641 @@
+---
+import type { Lang, Translations } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  t: Translations;
+}
+
+const { lang, t } = Astro.props;
+
+const homeHref = lang === 'pt' ? '/' : '/en/';
+const altLangHref = lang === 'pt' ? '/en/' : '/';
+
+const portfolioImages = [
+  '/images/space_zandria-chair-5727263_1280.jpg',
+  '/images/kaboompics-pillows-791906_1280.jpg',
+  '/images/stocksnap-bedroom-2593500_1280.jpg',
+  '/images/mxh6789-bedding-4321545_1280.jpg',
+];
+
+const serviceImages = [
+  '/images/leemelina08-home-1622401_1280.jpg',
+  '/images/mxh6789-bedding-4321545_1280.jpg',
+  '/images/kaboompics-pillows-791906_1280.jpg',
+  '/images/stocksnap-bedroom-2593500_1280.jpg',
+];
+---
+
+<header id="site-header" role="banner">
+  <nav id="main-nav" aria-label={t.nav.mainNav}>
+    <a href={homeHref} class="nav-logo" aria-label={`Jaestofador — ${t.nav.home}`}>
+      <img src="/images/jaestofador_logo.png" alt="Jaestofador" class="logo-img">
+    </a>
+
+    <button class="nav-toggle"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label={t.nav.menuOpen}>
+      <span class="burger-bar" aria-hidden="true"></span>
+      <span class="burger-bar" aria-hidden="true"></span>
+      <span class="burger-bar" aria-hidden="true"></span>
+    </button>
+
+    <ul id="nav-menu" class="nav-links" role="list">
+      <li><a href="#sobre">{t.nav.about}</a></li>
+      <li><a href="#servicos">{t.nav.services}</a></li>
+      <li><a href="#portfolio">{t.nav.portfolio}</a></li>
+      <li><a href="#contacto" class="nav-cta">{t.nav.contact}</a></li>
+      <li class="nav-lang">
+        <a href={altLangHref} class="lang-toggle" aria-label={t.nav.langSwitchAria}>
+          {t.nav.langSwitch}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main-content">
+
+  <!-- HERO -->
+  <section id="hero" aria-label={t.hero.eyebrow}>
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+        <source src="/videos/259050_small.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">{t.hero.eyebrow}</p>
+      <h1 class="hero-headline">
+        {t.hero.headline1}<br>
+        <em>{t.hero.headline2}</em>
+      </h1>
+      <p class="hero-subheadline" set:html={t.hero.sub.replace('\n', '<br class="break-lg">')}></p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn btn-primary">{t.hero.ctaPortfolio}</a>
+        <a href="#contacto" class="btn btn-ghost">{t.hero.ctaContact}</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="scroll-label">{t.hero.scroll}</span>
+      <span class="scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="sobre" aria-labelledby="sobre-heading">
+    <div class="about-grid">
+      <div class="about-image-wrap">
+        <figure class="about-figure reveal-left">
+          <img class="about-img"
+               src="/images/23555986-real-estate-9053405_1280.jpg"
+               alt={t.about.imgAlt}
+               width="1280" height="854" loading="lazy">
+        </figure>
+        <div class="about-badge reveal-scale" style="--delay: 300ms">
+          <span class="badge-number">{t.about.badgeNumber}</span>
+          <span class="badge-label" set:html={t.about.badgeLabel.replace('\n', '<br>')}></span>
+        </div>
+      </div>
+
+      <div class="about-text reveal-right">
+        <span class="section-eyebrow">{t.about.eyebrow}</span>
+        <h2 id="sobre-heading">{t.about.heading1}<br>{t.about.heading2}</h2>
+        <p class="about-lead">{t.about.lead}</p>
+        <p>{t.about.body}</p>
+
+        <ul class="about-values" role="list">
+          {t.about.values.map((v, i) => (
+            <li class="about-value-item">
+              <span class="value-icon" aria-hidden="true">
+                {i === 0 && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 3h12l4 6-10 13L2 9z"/>
+                    <path d="M2 9h20M6 3l-4 6m16-6 4 6"/>
+                  </svg>
+                )}
+                {i === 1 && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 7h18v10H3z"/>
+                    <path d="M7 7v3m4-3v5m4-5v3"/>
+                  </svg>
+                )}
+                {i === 2 && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 22c0 0-8-5.5-8-12a8 8 0 0 1 16 0c0 6.5-8 12-8 12z"/>
+                    <path d="M12 22V10"/>
+                  </svg>
+                )}
+              </span>
+              <div class="value-body">
+                <strong>{v.title}</strong>
+                <p>{v.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <a href="#contacto" class="btn btn-primary">{t.about.cta}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="servicos" aria-labelledby="servicos-heading">
+    <div class="services-inner">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">{t.services.eyebrow}</span>
+        <h2 id="servicos-heading">{t.services.heading}</h2>
+        <p class="section-intro">{t.services.intro}</p>
+      </div>
+
+      <div class="services-grid">
+        {t.services.items.map((s, i) => (
+          <article class="service-card reveal-up" style={`--delay: ${i * 120}ms`}>
+            <div class="service-img-wrap">
+              <img src={serviceImages[i]} alt={s.alt} loading="lazy" width="1280" height="854">
+            </div>
+            <div class="service-body">
+              <span class="service-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              <a href="#contacto" class="link-arrow">{t.services.learnMore}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" aria-labelledby="portfolio-heading">
+    <div class="section-header reveal-up">
+      <span class="section-eyebrow">{t.portfolio.eyebrow}</span>
+      <h2 id="portfolio-heading">{t.portfolio.heading}</h2>
+      <p class="section-intro">{t.portfolio.intro}</p>
+    </div>
+
+    <div class="portfolio-grid" role="list">
+      {t.portfolio.items.map((item, i) => (
+        <figure
+          class={`portfolio-item ${i === 0 ? 'portfolio-item--large' : ''} reveal-fade`}
+          role="listitem"
+          style={i > 0 ? `--delay: ${i * 120}ms` : ''}
+        >
+          <img src={portfolioImages[i]} alt={item.alt} loading="lazy" width="1280" height="854">
+          <figcaption class="portfolio-caption">
+            <span class="portfolio-cat">{item.cat}</span>
+            <strong class="portfolio-title">{item.title}</strong>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="onde-estamos" aria-labelledby="map-heading">
+    <div class="map-header reveal-up">
+      <span class="section-eyebrow">{t.map.eyebrow}</span>
+      <h2 id="map-heading">{t.map.heading}</h2>
+      <p class="section-intro">{t.map.intro}</p>
+    </div>
+    <div class="contact-map-wrap reveal-up">
+      <div
+        id="contact-map"
+        role="img"
+        aria-label={t.map.mapAria}
+        data-store-name={t.map.storeName}
+        data-warehouse-name={t.map.warehouseName}
+        data-directions={t.map.directions}
+        data-store-addr={t.contact.storeAddr.replace(/<br>/g, ' / ')}
+        data-warehouse-addr={t.contact.warehouseAddr.replace(/<br>/g, ' / ')}
+      ></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto" aria-labelledby="contacto-heading">
+    <div class="contact-inner">
+      <div class="contact-info reveal-left">
+        <span class="section-eyebrow">{t.contact.eyebrow}</span>
+        <h2 id="contacto-heading">{t.contact.heading1}<br>{t.contact.heading2}</h2>
+        <p>{t.contact.intro}</p>
+        <address class="contact-details">
+          <div class="contact-detail-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.91-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <a href="tel:+351918387387">+351 918 387 387</a>
+          </div>
+          <div class="contact-detail-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <a href="mailto:geral@jaestofador.pt">geral@jaestofador.pt</a>
+          </div>
+          <div class="contact-detail-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <div class="contact-locations">
+              <div class="contact-location">
+                <strong>{t.contact.storeLabel}</strong>
+                <span set:html={t.contact.storeAddr}></span>
+              </div>
+              <div class="contact-location">
+                <strong>{t.contact.warehouseLabel}</strong>
+                <span set:html={t.contact.warehouseAddr}></span>
+              </div>
+            </div>
+          </div>
+        </address>
+      </div>
+
+      <div class="contact-form-wrap reveal-right">
+        <h3>{t.contact.formTitle}</h3>
+
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" aria-label={t.contact.formTitle}
+              data-err-name={t.contact.errors.name}
+              data-err-email={t.contact.errors.email}
+              data-err-service={t.contact.errors.service}
+              data-err-message={t.contact.errors.message}>
+          <input type="hidden" name="access_key" value="71d6fbbb-cb42-478c-ad8e-aa063274e61f">
+          <input type="hidden" name="subject" value={t.contact.subject}>
+          <input type="hidden" name="from_name" value="Jaestofador Website">
+          <input type="hidden" name="language" value={lang}>
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+          <div class="form-row">
+            <div class="field-group">
+              <input type="text" id="nome" name="nome" required autocomplete="name" placeholder=" ">
+              <label for="nome">{t.contact.fields.name}</label>
+              <span class="field-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="field-group">
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
+              <label for="email">{t.contact.fields.email}</label>
+              <span class="field-error" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field-group">
+              <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder=" ">
+              <label for="telefone">{t.contact.fields.phone}</label>
+              <span class="field-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="field-group">
+              <select id="servico" name="servico" required>
+                <option value="" disabled selected></option>
+                {t.contact.services.map((s) => (
+                  <option value={s.value}>{s.label}</option>
+                ))}
+              </select>
+              <label for="servico">{t.contact.fields.service}</label>
+              <span class="field-error" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="field-group field-group--full">
+            <textarea id="mensagem" name="mensagem" rows="5" required placeholder=" "></textarea>
+            <label for="mensagem">{t.contact.fields.message}</label>
+            <span class="field-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="btn-submit-wrap">
+            <button type="submit" class="btn btn-primary btn-submit">
+              <span class="btn-text">{t.contact.submit}</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <p class="form-success" role="status" aria-live="polite" set:html={t.contact.success}></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/images/jaestofador_logo.png" alt="Jaestofador" class="logo-img">
+      <p>{t.footer.tagline}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label={t.footer.navAria}>
+      <span class="footer-nav-heading">{t.footer.navHeading}</span>
+      <a href="#sobre">{t.nav.about}</a>
+      <a href="#servicos">{t.nav.services}</a>
+      <a href="#portfolio">{t.nav.portfolio}</a>
+      <a href="#contacto">{t.nav.contact}</a>
+    </nav>
+
+    <div class="footer-contact">
+      <span class="footer-contact-heading">{t.footer.contactHeading}</span>
+      <a href="tel:+351918387387">+351 918 387 387</a>
+      <a href="mailto:geral@jaestofador.pt">geral@jaestofador.pt</a>
+      <p>{t.footer.location}</p>
+    </div>
+  </div>
+
+  <div class="footer-legal">
+    <p>&copy; {new Date().getFullYear()} Jaestofador. {t.footer.copyright}</p>
+    <a href="#">{t.footer.privacy}</a>
+  </div>
+</footer>
+
+<script>
+  document.body.classList.add('js-ready');
+
+  const header = document.getElementById('site-header');
+  const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement | null;
+  const navMenu = document.getElementById('nav-menu');
+  const navLinks = navMenu?.querySelectorAll('a') ?? [];
+  const sections = document.querySelectorAll('section[id]');
+
+  const menuOpenLabel = document.documentElement.lang === 'en' ? 'Open navigation menu' : 'Abrir menu de navegação';
+  const menuCloseLabel = document.documentElement.lang === 'en' ? 'Close menu' : 'Fechar menu';
+
+  function openNav() {
+    document.body.classList.add('nav-open');
+    toggle?.setAttribute('aria-expanded', 'true');
+    toggle?.setAttribute('aria-label', menuCloseLabel);
+    (navMenu?.querySelector('a') as HTMLElement | null)?.focus();
+  }
+
+  function closeNav() {
+    document.body.classList.remove('nav-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', menuOpenLabel);
+  }
+
+  toggle?.addEventListener('click', () => {
+    document.body.classList.contains('nav-open') ? closeNav() : openNav();
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (document.body.classList.contains('nav-open')) closeNav();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+      closeNav();
+      toggle?.focus();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (
+      document.body.classList.contains('nav-open') &&
+      !navMenu?.contains(e.target as Node) &&
+      !toggle?.contains(e.target as Node)
+    ) closeNav();
+  });
+
+  // Scroll-aware header
+  const sentinel = document.createElement('div');
+  sentinel.style.cssText = 'position:absolute;top:1px;left:0;width:1px;height:1px;pointer-events:none;';
+  document.body.prepend(sentinel);
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      header?.classList.toggle('header--scrolled', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach((link) => {
+          link.classList.toggle('nav-link--active', link.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+    sections.forEach((s) => sectionObserver.observe(s));
+  }
+
+  // Scroll Reveal
+  if ('IntersectionObserver' in window) {
+    const revealElements = document.querySelectorAll(
+      '.reveal-up, .reveal-left, .reveal-right, .reveal-fade, .reveal-scale'
+    );
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px' });
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right,.reveal-fade,.reveal-scale')
+      .forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // Parallax
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    const heroContent = document.querySelector('.hero-content') as HTMLElement | null;
+    const aboutFigure = document.querySelector('.about-figure') as HTMLElement | null;
+
+    if (heroContent || aboutFigure) {
+      let rafId: number | null = null;
+
+      function applyParallax() {
+        const scrollY = window.scrollY;
+        if (heroContent) {
+          const heroEl = document.getElementById('hero');
+          const heroH = heroEl ? heroEl.offsetHeight : window.innerHeight;
+          if (scrollY < heroH) {
+            heroContent.style.transform = 'translateY(' + (scrollY * 0.3) + 'px)';
+          }
+        }
+        if (aboutFigure) {
+          const aboutEl = document.getElementById('sobre');
+          if (aboutEl) {
+            const rect = aboutEl.getBoundingClientRect();
+            const sectH = aboutEl.offsetHeight;
+            const progress = Math.min(Math.max(1 - (rect.top + sectH) / (window.innerHeight + sectH), 0), 1);
+            const offset = (progress - 0.5) * 60;
+            aboutFigure.style.transform = 'translateY(' + offset + 'px)';
+          }
+        }
+        rafId = null;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!rafId) rafId = requestAnimationFrame(applyParallax);
+      }, { passive: true });
+      applyParallax();
+    }
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      const target = href && href !== '#' ? document.querySelector(href) : null;
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', href);
+    });
+  });
+
+  // Form
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = form?.querySelector('.btn-submit') as HTMLButtonElement | null;
+  const successMsg = form?.querySelector('.form-success') as HTMLElement | null;
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fields = [
+        { el: form.querySelector('#nome') as HTMLInputElement, msg: form.dataset.errName! },
+        { el: form.querySelector('#email') as HTMLInputElement, msg: form.dataset.errEmail! },
+        { el: form.querySelector('#servico') as HTMLSelectElement, msg: form.dataset.errService! },
+        { el: form.querySelector('#mensagem') as HTMLTextAreaElement, msg: form.dataset.errMessage! },
+      ];
+
+      let hasErrors = false;
+      fields.forEach(({ el, msg }) => {
+        const group = el?.closest('.field-group');
+        const errorEl = group?.querySelector('.field-error');
+        if (el && !el.value.trim()) {
+          group?.classList.add('has-error');
+          group?.classList.remove('is-valid');
+          if (errorEl) errorEl.textContent = msg;
+          hasErrors = true;
+        } else {
+          group?.classList.remove('has-error');
+          group?.classList.add('is-valid');
+          if (errorEl) errorEl.textContent = '';
+        }
+      });
+
+      if (hasErrors) return;
+
+      if (submitBtn) {
+        submitBtn.classList.add('is-loading');
+        submitBtn.disabled = true;
+      }
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, { method: 'POST', body: formData });
+        if (response.ok) {
+          if (successMsg) {
+            successMsg.classList.add('is-visible');
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          form.reset();
+          form.querySelectorAll('.field-group').forEach((g) => {
+            g.classList.remove('has-error', 'is-valid');
+            const err = g.querySelector('.field-error');
+            if (err) err.textContent = '';
+          });
+          setTimeout(() => {
+            if (successMsg) successMsg.classList.remove('is-visible');
+          }, 8000);
+        }
+      } catch {
+        // silently fail
+      } finally {
+        if (submitBtn) {
+          submitBtn.classList.remove('is-loading');
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  }
+
+  // Map (Leaflet)
+  const mapEl = document.getElementById('contact-map');
+  if (mapEl) {
+    const loadLeaflet = () => new Promise<void>((resolve, reject) => {
+      if ((window as any).L) return resolve();
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+      script.crossOrigin = '';
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error('Failed to load Leaflet'));
+      document.head.appendChild(script);
+    });
+
+    const initMap = () => {
+      const L = (window as any).L;
+      if (!L) return;
+
+      const ds = mapEl.dataset;
+      const storeName = ds.storeName ?? 'Loja';
+      const warehouseName = ds.warehouseName ?? 'Armazém';
+      const directions = ds.directions ?? 'Como chegar';
+      const storeAddr = ds.storeAddr ?? '';
+      const warehouseAddr = ds.warehouseAddr ?? '';
+
+      const store = [32.661494501214435, -16.927369602613524] as [number, number];
+      const warehouse = [32.673440865901576, -16.921811023659505] as [number, number];
+
+      const map = L.map(mapEl, { scrollWheelZoom: false }).setView(
+        [(store[0] + warehouse[0]) / 2, (store[1] + warehouse[1]) / 2],
+        15
+      );
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+
+      const pinIcon = L.divIcon({
+        className: 'jae-marker-wrap',
+        html: '<div class="jae-marker"></div>',
+        iconSize: [36, 36],
+        iconAnchor: [18, 36],
+        popupAnchor: [0, -34]
+      });
+
+      const buildPopup = (name: string, addr: string, coords: [number, number]) =>
+        '<strong>' + name + '</strong>' + addr.split(' / ').join('<br>') +
+        '<br><a href="https://www.google.com/maps/dir/?api=1&destination=' +
+        coords[0] + ',' + coords[1] + '" target="_blank" rel="noopener">' +
+        directions + ' &rarr;</a>';
+
+      const storeMarker = L.marker(store, { icon: pinIcon }).addTo(map).bindPopup(
+        buildPopup(storeName, storeAddr, store)
+      );
+      const warehouseMarker = L.marker(warehouse, { icon: pinIcon }).addTo(map).bindPopup(
+        buildPopup(warehouseName, warehouseAddr, warehouse)
+      );
+
+      const group = L.featureGroup([storeMarker, warehouseMarker]);
+      map.fitBounds(group.getBounds().pad(0.25), { maxZoom: 16 });
+      storeMarker.openPopup();
+    };
+
+    if ('IntersectionObserver' in window) {
+      const mapObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadLeaflet().then(initMap).catch(() => {});
+            mapObserver.disconnect();
+          }
+        });
+      }, { rootMargin: '200px' });
+      mapObserver.observe(mapEl);
+    } else {
+      loadLeaflet().then(initMap).catch(() => {});
+    }
+  }
+</script>

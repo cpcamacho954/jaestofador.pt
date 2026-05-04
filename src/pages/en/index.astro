@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Site from '../../components/Site.astro';
+import { translations } from '../../i18n';
+
+const t = translations.en;
+---
+<Layout
+  title={t.pageTitle}
+  description={t.metaDescription}
+  lang="en"
+  ogTitle={t.ogTitle}
+  ogDescription={t.ogDescription}
+  ogLocale={t.ogLocale}
+  altLangHref="/"
+  altLang="pt"
+>
+  <Site lang="en" t={t} />
+</Layout>

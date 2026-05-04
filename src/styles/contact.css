@@ -189,3 +189,169 @@
     justify-content: center;
   }
 }
+
+/* ── Two locations list ───────────────────────────────────────── */
+.contact-locations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-location {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  line-height: var(--leading-snug);
+}
+
+.contact-location strong {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+
+.contact-location span {
+  font-size: var(--text-sm);
+  color: inherit;
+}
+
+/* ── Map Section ──────────────────────────────────────────────── */
+#onde-estamos {
+  background-color: var(--color-cream);
+  padding-block: var(--section-pad-y);
+}
+
+.map-header {
+  max-width: var(--container-max);
+  margin: 0 auto var(--space-6);
+  padding-inline: var(--container-pad);
+  text-align: center;
+}
+
+.map-header .section-intro {
+  margin-inline: auto;
+  max-width: 56ch;
+}
+
+.contact-map-wrap {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#contact-map {
+  width: 100%;
+  height: clamp(420px, 65vh, 640px);
+  background-color: var(--color-sand);
+  z-index: 0;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background-color: var(--color-sand);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.leaflet-popup-content {
+  margin: 14px 18px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--color-text-body);
+}
+
+.leaflet-popup-content strong {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--color-walnut);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.leaflet-popup-content a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-terracotta);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.leaflet-popup-content a:hover {
+  color: var(--color-terracotta-dk);
+}
+
+/* Layer control (Satélite / Mapa toggle) */
+.leaflet-control-layers {
+  border: 0 !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  background: var(--color-cream) !important;
+  font-family: var(--font-sans);
+  padding: 0.4rem 0.75rem !important;
+}
+
+.leaflet-control-layers label {
+  font-size: var(--text-sm);
+  color: var(--color-walnut);
+  font-weight: 500;
+  padding: 0.15rem 0;
+}
+
+.leaflet-control-layers-base label input {
+  margin-right: 0.4rem;
+}
+
+/* Custom marker pin */
+.jae-marker-wrap {
+  background: transparent;
+  border: 0;
+}
+
+.jae-marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--color-terracotta);
+  border: 3px solid var(--color-cream);
+  box-shadow: var(--shadow-md);
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jae-marker::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  transform: rotate(45deg);
+}
+
+/* ── Mobile / Tablet refinements ──────────────────────────────── */
+@media (max-width: 767px) {
+  .map-header {
+    padding-inline: var(--container-pad);
+  }
+
+  #contact-map {
+    height: clamp(340px, 55vh, 480px);
+  }
+
+  .contact-locations {
+    gap: var(--space-1);
+  }
+
+  .leaflet-popup-content {
+    margin: 12px 14px;
+    font-size: 0.85rem;
+  }
+}

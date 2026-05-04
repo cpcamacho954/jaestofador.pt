@@ -148,12 +148,19 @@
   margin-bottom: 0;
 }
 
-/* ── Mobile ───────────────────────────────────────────────────── */
-@media (max-width: 767px) {
+/* ── Tablet / Mobile ──────────────────────────────────────────── */
+@media (max-width: 1023px) {
   .about-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 
+  .about-image-wrap {
+    margin-bottom: var(--space-4);
+  }
+}
+
+@media (max-width: 767px) {
   .about-badge {
     left: 1rem;
     bottom: -1rem;

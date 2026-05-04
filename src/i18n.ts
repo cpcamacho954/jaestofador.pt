@@ -157,6 +157,8 @@ export const translations = {
       copyright: 'Todos os direitos reservados.',
       privacy: 'Política de Privacidade',
       navAria: 'Navegação de rodapé',
+      partnerWith: 'Em parceria com',
+      partnerAria: 'Reparar.com — abrir em nova janela',
     },
   },
 
@@ -316,6 +318,8 @@ export const translations = {
       copyright: 'All rights reserved.',
       privacy: 'Privacy Policy',
       navAria: 'Footer navigation',
+      partnerWith: 'In partnership with',
+      partnerAria: 'Reparar.com — open in new window',
     },
   },
 } as const;

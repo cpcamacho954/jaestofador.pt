@@ -106,6 +106,45 @@
   color: var(--color-cream);
 }
 
+/* ── Partner Bar ──────────────────────────────────────────────── */
+.footer-partner {
+  border-top: 1px solid rgba(245, 240, 232, 0.08);
+  padding-block: 0.85rem;
+  padding-inline: var(--container-pad);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.footer-partner-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.4);
+}
+
+.footer-partner-link {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.65;
+  transition: opacity var(--dur-base) ease;
+}
+
+.footer-partner-link:hover {
+  opacity: 1;
+}
+
+.footer-partner-logo {
+  height: 1rem;
+  width: auto;
+  display: block;
+}
+
 /* ── Legal Bar ────────────────────────────────────────────────── */
 .footer-legal {
   border-top: 1px solid rgba(245, 240, 232, 0.1);
